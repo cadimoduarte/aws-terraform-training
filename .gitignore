@@ -29,6 +29,7 @@ override.tf.json
 # example: *tfplan*
 
 zup_key
+zup_key.pub
 zup-lambda.zip
 node_modules/
 package-lock.json
