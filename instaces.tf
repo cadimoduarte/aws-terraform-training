@@ -7,8 +7,11 @@ resource "aws_instance" "instances" {
 
   key_name = aws_key_pair.keypair.key_name
 
-  vpc_security_group_ids = [aws_security_group.allow_ssh.id, aws_security_group.database.id]
+  vpc_security_group_ids = [aws_security_group.allow_ssh.id, aws_security_group.database.id
+                          , aws_security_group.allow_outbound.id, aws_security_group.load_balancer_tg.id]
   
+  user_data = templatefile("${path.module}/user_data/install_app.tmpl", {database_endpoint = module.rds.this_db_instance_endpoint})
+
   tags = { 
     Name = "trainning_instances"
   }
